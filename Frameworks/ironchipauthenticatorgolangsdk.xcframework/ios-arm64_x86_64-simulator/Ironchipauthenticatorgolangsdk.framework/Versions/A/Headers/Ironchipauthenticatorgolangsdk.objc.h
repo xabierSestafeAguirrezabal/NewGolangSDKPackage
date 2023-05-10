@@ -32,6 +32,7 @@
 @class IronchipauthenticatorgolangsdkOTPSecret;
 @class IronchipauthenticatorgolangsdkScanOptions;
 @class IronchipauthenticatorgolangsdkScannerData;
+@class IronchipauthenticatorgolangsdkScannerWrapper;
 @class IronchipauthenticatorgolangsdkSignalScannerOptionsList;
 @class IronchipauthenticatorgolangsdkSignals;
 @class IronchipauthenticatorgolangsdkSkin;
@@ -185,6 +186,7 @@
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
 - (nullable instancetype)init:(id<IronchipauthenticatorgolangsdkGEOScannerCallback> _Nullable)geoScannerCallback;
 - (IronchipauthenticatorgolangsdkScannerData* _Nullable)getData:(BOOL)newKey error:(NSError* _Nullable* _Nullable)error;
+- (id<IronchipauthenticatorgolangsdkScannerInterface> _Nullable)getInterface;
 @end
 
 @interface IronchipauthenticatorgolangsdkGEOSignal : NSObject <goSeqRefInterface> {
@@ -343,6 +345,16 @@
 @property (nonatomic) NSData* _Nullable data;
 @end
 
+@interface IronchipauthenticatorgolangsdkScannerWrapper : NSObject <goSeqRefInterface> {
+}
+@property(strong, readonly) _Nonnull id _ref;
+
+- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
+- (nullable instancetype)init:(id<IronchipauthenticatorgolangsdkScannerInterface> _Nullable)scannerInterface;
+// skipped method ScannerWrapper.GenerateSafeZoneKey with unsupported parameter or return types
+
+@end
+
 @interface IronchipauthenticatorgolangsdkSignalScannerOptionsList : NSObject <goSeqRefInterface> {
 }
 @property(strong, readonly) _Nonnull id _ref;
@@ -465,6 +477,8 @@ FOUNDATION_EXPORT IronchipauthenticatorgolangsdkOTP* _Nullable Ironchipauthentic
 FOUNDATION_EXPORT IronchipauthenticatorgolangsdkOTPMobileInitializer* _Nullable IronchipauthenticatorgolangsdkNewOTPMobileInitializer(NSString* _Nullable path, NSError* _Nullable* _Nullable error);
 
 FOUNDATION_EXPORT IronchipauthenticatorgolangsdkOTPMobileInterface* _Nullable IronchipauthenticatorgolangsdkNewOTPMobileInterface(NSString* _Nullable path, NSString* _Nullable token, NSError* _Nullable* _Nullable error);
+
+FOUNDATION_EXPORT IronchipauthenticatorgolangsdkScannerWrapper* _Nullable IronchipauthenticatorgolangsdkNewScannerWrapper(id<IronchipauthenticatorgolangsdkScannerInterface> _Nullable scannerInterface);
 
 FOUNDATION_EXPORT IronchipauthenticatorgolangsdkSignals* _Nullable IronchipauthenticatorgolangsdkNewSignals(NSString* _Nullable signalType);
 
