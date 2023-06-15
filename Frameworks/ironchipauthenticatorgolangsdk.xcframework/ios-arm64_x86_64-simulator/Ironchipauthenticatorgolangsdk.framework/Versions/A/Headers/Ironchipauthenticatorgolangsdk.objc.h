@@ -16,13 +16,11 @@
 @class IronchipauthenticatorgolangsdkAuthorization;
 @class IronchipauthenticatorgolangsdkAuthorizationIterator;
 @class IronchipauthenticatorgolangsdkAuthorizedLBAuthSDKMobile;
-@class IronchipauthenticatorgolangsdkEMScanner;
-@class IronchipauthenticatorgolangsdkGEOScanner;
+@class IronchipauthenticatorgolangsdkEMSignals;
 @class IronchipauthenticatorgolangsdkGEOSignal;
 @class IronchipauthenticatorgolangsdkIDSConfiguration;
 @class IronchipauthenticatorgolangsdkKey;
 @class IronchipauthenticatorgolangsdkKeyIterator;
-@class IronchipauthenticatorgolangsdkNetworkSignals;
 @class IronchipauthenticatorgolangsdkNotification;
 @class IronchipauthenticatorgolangsdkOTP;
 @class IronchipauthenticatorgolangsdkOTPIterator;
@@ -30,56 +28,21 @@
 @class IronchipauthenticatorgolangsdkOTPMobileInterface;
 @class IronchipauthenticatorgolangsdkOTPSJson;
 @class IronchipauthenticatorgolangsdkOTPSecret;
-@class IronchipauthenticatorgolangsdkScanOptions;
-@class IronchipauthenticatorgolangsdkScannerData;
-@class IronchipauthenticatorgolangsdkScannerWrapper;
-@class IronchipauthenticatorgolangsdkSignalScannerOptionsList;
+@class IronchipauthenticatorgolangsdkSafezone;
 @class IronchipauthenticatorgolangsdkSignals;
 @class IronchipauthenticatorgolangsdkSkin;
 @class IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDKMobile;
 @class IronchipauthenticatorgolangsdkUser;
-@protocol IronchipauthenticatorgolangsdkAuthorizedLBAuthSDK;
-@class IronchipauthenticatorgolangsdkAuthorizedLBAuthSDK;
 @protocol IronchipauthenticatorgolangsdkChannelCallback;
 @class IronchipauthenticatorgolangsdkChannelCallback;
-@protocol IronchipauthenticatorgolangsdkEMScannerCallback;
-@class IronchipauthenticatorgolangsdkEMScannerCallback;
-@protocol IronchipauthenticatorgolangsdkGEOScannerCallback;
-@class IronchipauthenticatorgolangsdkGEOScannerCallback;
 @protocol IronchipauthenticatorgolangsdkNotificationCallback;
 @class IronchipauthenticatorgolangsdkNotificationCallback;
-@protocol IronchipauthenticatorgolangsdkScannerInterface;
-@class IronchipauthenticatorgolangsdkScannerInterface;
-@protocol IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDK;
-@class IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDK;
-
-@protocol IronchipauthenticatorgolangsdkAuthorizedLBAuthSDK <NSObject>
-- (BOOL)authorize:(NSString* _Nullable)accessID error:(NSError* _Nullable* _Nullable)error;
-- (BOOL)createKey:(NSString* _Nullable)keyName error:(NSError* _Nullable* _Nullable)error;
-- (NSString* _Nonnull)getAccesses:(NSError* _Nullable* _Nullable)error;
-- (NSString* _Nonnull)getActiveAccesses:(NSError* _Nullable* _Nullable)error;
-- (NSString* _Nonnull)getKeys:(NSError* _Nullable* _Nullable)error;
-- (BOOL)getNotifications:(id<IronchipauthenticatorgolangsdkNotificationCallback> _Nullable)callback error:(NSError* _Nullable* _Nullable)error;
-- (IronchipauthenticatorgolangsdkSkin* _Nullable)getSkin:(NSError* _Nullable* _Nullable)error;
-- (IronchipauthenticatorgolangsdkUser* _Nullable)getUser:(NSError* _Nullable* _Nullable)error;
-- (BOOL)initMutualTLS:(NSError* _Nullable* _Nullable)error;
-- (IronchipauthenticatorgolangsdkIDSConfiguration* _Nullable)mobileGetIDSConfiguration:(NSError* _Nullable* _Nullable)error;
-- (void)setDNS:(NSString* _Nullable)dnsIP protocol:(NSString* _Nullable)protocol;
-- (BOOL)setProxy:(NSString* _Nullable)hostName port:(long)port error:(NSError* _Nullable* _Nullable)error;
-@end
+@protocol IronchipauthenticatorgolangsdkScanner;
+@class IronchipauthenticatorgolangsdkScanner;
 
 @protocol IronchipauthenticatorgolangsdkChannelCallback <NSObject>
 - (void)onError:(NSError* _Nullable)err;
 - (void)onFinish;
-@end
-
-@protocol IronchipauthenticatorgolangsdkEMScannerCallback <NSObject>
-- (IronchipauthenticatorgolangsdkNetworkSignals* _Nullable)getNetwork:(NSError* _Nullable* _Nullable)error;
-- (IronchipauthenticatorgolangsdkSignals* _Nullable)getWifi:(NSError* _Nullable* _Nullable)error;
-@end
-
-@protocol IronchipauthenticatorgolangsdkGEOScannerCallback <NSObject>
-- (IronchipauthenticatorgolangsdkGEOSignal* _Nullable)getSignals:(NSError* _Nullable* _Nullable)error;
 @end
 
 @protocol IronchipauthenticatorgolangsdkNotificationCallback <NSObject>
@@ -87,14 +50,8 @@
 - (void)onNotification:(IronchipauthenticatorgolangsdkNotification* _Nullable)notification;
 @end
 
-@protocol IronchipauthenticatorgolangsdkScannerInterface <NSObject>
-- (IronchipauthenticatorgolangsdkScannerData* _Nullable)getData:(BOOL)newKey error:(NSError* _Nullable* _Nullable)error;
-@end
-
-@protocol IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDK <NSObject>
-- (NSString* _Nonnull)register:(NSString* _Nullable)deviceName deviceID:(NSString* _Nullable)deviceID QRCode:(NSString* _Nullable)QRCode error:(NSError* _Nullable* _Nullable)error;
-- (void)setDNS:(NSString* _Nullable)dnsIP protocol:(NSString* _Nullable)protocol;
-- (BOOL)setProxy:(NSString* _Nullable)platform hostName:(NSString* _Nullable)hostName port:(long)port error:(NSError* _Nullable* _Nullable)error;
+@protocol IronchipauthenticatorgolangsdkScanner <NSObject>
+- (IronchipauthenticatorgolangsdkSafezone* _Nullable)getScanResult:(NSString* _Nullable)keyName isCreation:(BOOL)isCreation error:(NSError* _Nullable* _Nullable)error;
 @end
 
 @interface IronchipauthenticatorgolangsdkAccess : NSObject <goSeqRefInterface> {
@@ -155,7 +112,7 @@
 @property(strong, readonly) _Nonnull id _ref;
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nullable instancetype)init:(NSString* _Nullable)host version:(NSString* _Nullable)version storagePath:(NSString* _Nullable)storagePath storageKey:(NSString* _Nullable)storageKey notificationURL:(NSString* _Nullable)notificationURL scannerInterface:(id<IronchipauthenticatorgolangsdkScannerInterface> _Nullable)scannerInterface;
+- (nullable instancetype)init:(NSString* _Nullable)host version:(NSString* _Nullable)version storagePath:(NSString* _Nullable)storagePath storageKey:(NSString* _Nullable)storageKey notificationURL:(NSString* _Nullable)notificationURL scannerInterface:(id<IronchipauthenticatorgolangsdkScanner> _Nullable)scannerInterface;
 - (void)authorize:(NSString* _Nullable)accessID channelCallback:(id<IronchipauthenticatorgolangsdkChannelCallback> _Nullable)channelCallback;
 - (void)createKey:(NSString* _Nullable)keyName channelCallback:(id<IronchipauthenticatorgolangsdkChannelCallback> _Nullable)channelCallback;
 - (IronchipauthenticatorgolangsdkAccessIterator* _Nullable)getAccesses:(NSError* _Nullable* _Nullable)error;
@@ -170,23 +127,20 @@
 - (BOOL)setProxy:(NSString* _Nullable)hostName port:(long)port error:(NSError* _Nullable* _Nullable)error;
 @end
 
-@interface IronchipauthenticatorgolangsdkEMScanner : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkScannerInterface> {
+@interface IronchipauthenticatorgolangsdkEMSignals : NSObject <goSeqRefInterface> {
 }
 @property(strong, readonly) _Nonnull id _ref;
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nullable instancetype)init:(id<IronchipauthenticatorgolangsdkEMScannerCallback> _Nullable)emScannerCallback;
-- (IronchipauthenticatorgolangsdkScannerData* _Nullable)getData:(BOOL)newKey error:(NSError* _Nullable* _Nullable)error;
-@end
+- (nullable instancetype)init;
+// skipped field EMSignals.TimeScanned with unsupported type: time.Time
 
-@interface IronchipauthenticatorgolangsdkGEOScanner : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkScannerInterface> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nullable instancetype)init:(id<IronchipauthenticatorgolangsdkGEOScannerCallback> _Nullable)geoScannerCallback;
-- (IronchipauthenticatorgolangsdkScannerData* _Nullable)getData:(BOOL)newKey error:(NSError* _Nullable* _Nullable)error;
-- (id<IronchipauthenticatorgolangsdkScannerInterface> _Nullable)getInterface;
+- (BOOL)setCDMASignals:(IronchipauthenticatorgolangsdkSignals* _Nullable)signals error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)setGSMSignals:(IronchipauthenticatorgolangsdkSignals* _Nullable)signals error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)setLTESignals:(IronchipauthenticatorgolangsdkSignals* _Nullable)signals error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)setWCDMASignals:(IronchipauthenticatorgolangsdkSignals* _Nullable)signals error:(NSError* _Nullable* _Nullable)error;
+- (BOOL)setWIFISignals:(IronchipauthenticatorgolangsdkSignals* _Nullable)signals error:(NSError* _Nullable* _Nullable)error;
+- (IronchipauthenticatorgolangsdkSafezone* _Nullable)toSZ:(NSString* _Nullable)keyName error:(NSError* _Nullable* _Nullable)error;
 @end
 
 @interface IronchipauthenticatorgolangsdkGEOSignal : NSObject <goSeqRefInterface> {
@@ -194,11 +148,11 @@
 @property(strong, readonly) _Nonnull id _ref;
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nullable instancetype)init:(double)latitude longitude:(double)longitude altitude:(double)altitude;
-@property (nonatomic) double latitude;
-@property (nonatomic) double longitude;
-@property (nonatomic) double altitude;
-@property (nonatomic) BOOL isCreation;
+- (nonnull instancetype)init;
+- (void)setAltitude:(double)altitude;
+- (void)setLatitude:(double)latitude;
+- (void)setLongitude:(double)longitude;
+- (IronchipauthenticatorgolangsdkSafezone* _Nullable)toSZ:(NSString* _Nullable)keyName isCreation:(BOOL)isCreation error:(NSError* _Nullable* _Nullable)error;
 @end
 
 @interface IronchipauthenticatorgolangsdkIDSConfiguration : NSObject <goSeqRefInterface> {
@@ -233,17 +187,6 @@
 - (BOOL)hasNext;
 - (IronchipauthenticatorgolangsdkKey* _Nullable)next;
 - (void)reset;
-@end
-
-@interface IronchipauthenticatorgolangsdkNetworkSignals : NSObject <goSeqRefInterface> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nullable instancetype)init;
-// skipped field NetworkSignals.TimeScanned with unsupported type: time.Time
-
-- (void)newSignals:(NSString* _Nullable)signalType signals:(IronchipauthenticatorgolangsdkSignals* _Nullable)signals;
 @end
 
 @interface IronchipauthenticatorgolangsdkNotification : NSObject <goSeqRefInterface> {
@@ -322,50 +265,13 @@
 - (int64_t)getTimeout;
 @end
 
-@interface IronchipauthenticatorgolangsdkScanOptions : NSObject <goSeqRefInterface> {
+@interface IronchipauthenticatorgolangsdkSafezone : NSObject <goSeqRefInterface> {
 }
 @property(strong, readonly) _Nonnull id _ref;
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
 - (nonnull instancetype)init;
-@property (nonatomic) BOOL enable;
-@property (nonatomic) long scanIterations;
-// skipped field ScanOptions.ScanTimeInterval with unsupported type: time.Duration
-
-@end
-
-@interface IronchipauthenticatorgolangsdkScannerData : NSObject <goSeqRefInterface> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nonnull instancetype)init;
-// skipped field ScannerData.Type with unsupported type: fraud-golang-interface/platforms/mobile.ScannerType
-
-@property (nonatomic) NSData* _Nullable data;
-@end
-
-@interface IronchipauthenticatorgolangsdkScannerWrapper : NSObject <goSeqRefInterface> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nullable instancetype)init:(id<IronchipauthenticatorgolangsdkScannerInterface> _Nullable)scannerInterface;
-// skipped method ScannerWrapper.GenerateSafeZoneKey with unsupported parameter or return types
-
-@end
-
-@interface IronchipauthenticatorgolangsdkSignalScannerOptionsList : NSObject <goSeqRefInterface> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (nonnull instancetype)init;
-// skipped field SignalScannerOptionsList.SignalScanIterationDelay with unsupported type: time.Duration
-
-// skipped field SignalScannerOptionsList.WifiOptions with unsupported type: fraud-golang-interface/platforms/mobile.ScanOptions
-
-// skipped field SignalScannerOptionsList.NetworkOptions with unsupported type: fraud-golang-interface/platforms/mobile.ScanOptions
+// skipped method Safezone.GetKeyI with unsupported parameter or return types
 
 @end
 
@@ -375,7 +281,8 @@
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
 - (nullable instancetype)init:(NSString* _Nullable)signalType;
-@property (nonatomic) NSString* _Nonnull signalType;
+// skipped field Signals.SignalType with unsupported type: git.kydom.net/ironchip/location_core_location_service/api/models.SignalType
+
 // skipped field Signals.SignalsRecorded with unsupported type: []git.kydom.net/ironchip/location_core_location_service/api/models.Signal
 
 - (long)getLenght;
@@ -425,22 +332,19 @@
 
 // skipped const AndroidPlatform with unsupported type: fraud-golang-interface/platforms/mobile.Platform
 
+FOUNDATION_EXPORT NSString* _Nonnull const IronchipauthenticatorgolangsdkCDMA_TYPE;
 // skipped const DesktopPlatform with unsupported type: fraud-golang-interface/platforms/mobile.Platform
 
-// skipped const EMScannerType with unsupported type: fraud-golang-interface/platforms/mobile.ScannerType
-
-// skipped const GEOScannerType with unsupported type: fraud-golang-interface/platforms/mobile.ScannerType
-
+FOUNDATION_EXPORT NSString* _Nonnull const IronchipauthenticatorgolangsdkGSM_TYPE;
 // skipped const IOSPlatform with unsupported type: fraud-golang-interface/platforms/mobile.Platform
 
+FOUNDATION_EXPORT NSString* _Nonnull const IronchipauthenticatorgolangsdkLTE_TYPE;
+FOUNDATION_EXPORT NSString* _Nonnull const IronchipauthenticatorgolangsdkWCDMA_TYPE;
+FOUNDATION_EXPORT NSString* _Nonnull const IronchipauthenticatorgolangsdkWIFI_TYPE;
 
 @interface Ironchipauthenticatorgolangsdk : NSObject
 + (long) authorizatioN_MAX_TIME;
 + (void) setAUTHORIZATION_MAX_TIME:(long)v;
-
-// skipped variable AndroidAuthorizeSafezoneKeyScannerOptions with unsupported type: fraud-golang-interface/platforms/mobile.SignalScannerOptionsList
-
-// skipped variable AndroidDefaultAddKeyScannerOptions with unsupported type: fraud-golang-interface/platforms/mobile.SignalScannerOptionsList
 
 @end
 
@@ -454,20 +358,14 @@ FOUNDATION_EXPORT IronchipauthenticatorgolangsdkAuthorization* _Nullable Ironchi
 // skipped function NewAuthorizationIterator with unsupported parameter or return types
 
 
-FOUNDATION_EXPORT IronchipauthenticatorgolangsdkAuthorizedLBAuthSDKMobile* _Nullable IronchipauthenticatorgolangsdkNewAuthorizedLBAuthSDKMobile(NSString* _Nullable host, NSString* _Nullable version, NSString* _Nullable storagePath, NSString* _Nullable storageKey, NSString* _Nullable notificationURL, id<IronchipauthenticatorgolangsdkScannerInterface> _Nullable scannerInterface, NSError* _Nullable* _Nullable error);
+FOUNDATION_EXPORT IronchipauthenticatorgolangsdkAuthorizedLBAuthSDKMobile* _Nullable IronchipauthenticatorgolangsdkNewAuthorizedLBAuthSDKMobile(NSString* _Nullable host, NSString* _Nullable version, NSString* _Nullable storagePath, NSString* _Nullable storageKey, NSString* _Nullable notificationURL, id<IronchipauthenticatorgolangsdkScanner> _Nullable scannerInterface, NSError* _Nullable* _Nullable error);
 
-FOUNDATION_EXPORT IronchipauthenticatorgolangsdkEMScanner* _Nullable IronchipauthenticatorgolangsdkNewEMScanner(id<IronchipauthenticatorgolangsdkEMScannerCallback> _Nullable emScannerCallback);
-
-FOUNDATION_EXPORT IronchipauthenticatorgolangsdkGEOScanner* _Nullable IronchipauthenticatorgolangsdkNewGEOScanner(id<IronchipauthenticatorgolangsdkGEOScannerCallback> _Nullable geoScannerCallback);
-
-FOUNDATION_EXPORT IronchipauthenticatorgolangsdkGEOSignal* _Nullable IronchipauthenticatorgolangsdkNewGEOSignal(double latitude, double longitude, double altitude);
+FOUNDATION_EXPORT IronchipauthenticatorgolangsdkEMSignals* _Nullable IronchipauthenticatorgolangsdkNewEMSignals(void);
 
 FOUNDATION_EXPORT IronchipauthenticatorgolangsdkKey* _Nullable IronchipauthenticatorgolangsdkNewKey(NSString* _Nullable keyType, NSString* _Nullable name);
 
 // skipped function NewKeyIterator with unsupported parameter or return types
 
-
-FOUNDATION_EXPORT IronchipauthenticatorgolangsdkNetworkSignals* _Nullable IronchipauthenticatorgolangsdkNewNetworkSignals(void);
 
 FOUNDATION_EXPORT IronchipauthenticatorgolangsdkOTP* _Nullable IronchipauthenticatorgolangsdkNewOTP(NSString* _Nullable serviceID, NSString* _Nullable username);
 
@@ -478,44 +376,15 @@ FOUNDATION_EXPORT IronchipauthenticatorgolangsdkOTPMobileInitializer* _Nullable 
 
 FOUNDATION_EXPORT IronchipauthenticatorgolangsdkOTPMobileInterface* _Nullable IronchipauthenticatorgolangsdkNewOTPMobileInterface(NSString* _Nullable path, NSString* _Nullable token, NSError* _Nullable* _Nullable error);
 
-FOUNDATION_EXPORT IronchipauthenticatorgolangsdkScannerWrapper* _Nullable IronchipauthenticatorgolangsdkNewScannerWrapper(id<IronchipauthenticatorgolangsdkScannerInterface> _Nullable scannerInterface);
-
-FOUNDATION_EXPORT IronchipauthenticatorgolangsdkSignals* _Nullable IronchipauthenticatorgolangsdkNewSignals(NSString* _Nullable signalType);
+FOUNDATION_EXPORT IronchipauthenticatorgolangsdkSignals* _Nullable IronchipauthenticatorgolangsdkNewSignals(NSString* _Nullable signalType, NSError* _Nullable* _Nullable error);
 
 FOUNDATION_EXPORT IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDKMobile* _Nullable IronchipauthenticatorgolangsdkNewUnauthorizedLBAuthSDKMobile(NSString* _Nullable platform, NSString* _Nullable host, NSString* _Nullable version, NSString* _Nullable path, NSError* _Nullable* _Nullable error);
 
-@class IronchipauthenticatorgolangsdkAuthorizedLBAuthSDK;
-
 @class IronchipauthenticatorgolangsdkChannelCallback;
-
-@class IronchipauthenticatorgolangsdkEMScannerCallback;
-
-@class IronchipauthenticatorgolangsdkGEOScannerCallback;
 
 @class IronchipauthenticatorgolangsdkNotificationCallback;
 
-@class IronchipauthenticatorgolangsdkScannerInterface;
-
-@class IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDK;
-
-@interface IronchipauthenticatorgolangsdkAuthorizedLBAuthSDK : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkAuthorizedLBAuthSDK> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (BOOL)authorize:(NSString* _Nullable)accessID error:(NSError* _Nullable* _Nullable)error;
-- (BOOL)createKey:(NSString* _Nullable)keyName error:(NSError* _Nullable* _Nullable)error;
-- (NSString* _Nonnull)getAccesses:(NSError* _Nullable* _Nullable)error;
-- (NSString* _Nonnull)getActiveAccesses:(NSError* _Nullable* _Nullable)error;
-- (NSString* _Nonnull)getKeys:(NSError* _Nullable* _Nullable)error;
-- (BOOL)getNotifications:(id<IronchipauthenticatorgolangsdkNotificationCallback> _Nullable)callback error:(NSError* _Nullable* _Nullable)error;
-- (IronchipauthenticatorgolangsdkSkin* _Nullable)getSkin:(NSError* _Nullable* _Nullable)error;
-- (IronchipauthenticatorgolangsdkUser* _Nullable)getUser:(NSError* _Nullable* _Nullable)error;
-- (BOOL)initMutualTLS:(NSError* _Nullable* _Nullable)error;
-- (IronchipauthenticatorgolangsdkIDSConfiguration* _Nullable)mobileGetIDSConfiguration:(NSError* _Nullable* _Nullable)error;
-- (void)setDNS:(NSString* _Nullable)dnsIP protocol:(NSString* _Nullable)protocol;
-- (BOOL)setProxy:(NSString* _Nullable)hostName port:(long)port error:(NSError* _Nullable* _Nullable)error;
-@end
+@class IronchipauthenticatorgolangsdkScanner;
 
 @interface IronchipauthenticatorgolangsdkChannelCallback : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkChannelCallback> {
 }
@@ -524,23 +393,6 @@ FOUNDATION_EXPORT IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDKMobile* _Nu
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
 - (void)onError:(NSError* _Nullable)err;
 - (void)onFinish;
-@end
-
-@interface IronchipauthenticatorgolangsdkEMScannerCallback : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkEMScannerCallback> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (IronchipauthenticatorgolangsdkNetworkSignals* _Nullable)getNetwork:(NSError* _Nullable* _Nullable)error;
-- (IronchipauthenticatorgolangsdkSignals* _Nullable)getWifi:(NSError* _Nullable* _Nullable)error;
-@end
-
-@interface IronchipauthenticatorgolangsdkGEOScannerCallback : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkGEOScannerCallback> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (IronchipauthenticatorgolangsdkGEOSignal* _Nullable)getSignals:(NSError* _Nullable* _Nullable)error;
 @end
 
 @interface IronchipauthenticatorgolangsdkNotificationCallback : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkNotificationCallback> {
@@ -552,22 +404,12 @@ FOUNDATION_EXPORT IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDKMobile* _Nu
 - (void)onNotification:(IronchipauthenticatorgolangsdkNotification* _Nullable)notification;
 @end
 
-@interface IronchipauthenticatorgolangsdkScannerInterface : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkScannerInterface> {
+@interface IronchipauthenticatorgolangsdkScanner : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkScanner> {
 }
 @property(strong, readonly) _Nonnull id _ref;
 
 - (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (IronchipauthenticatorgolangsdkScannerData* _Nullable)getData:(BOOL)newKey error:(NSError* _Nullable* _Nullable)error;
-@end
-
-@interface IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDK : NSObject <goSeqRefInterface, IronchipauthenticatorgolangsdkUnauthorizedLBAuthSDK> {
-}
-@property(strong, readonly) _Nonnull id _ref;
-
-- (nonnull instancetype)initWithRef:(_Nonnull id)ref;
-- (NSString* _Nonnull)register:(NSString* _Nullable)deviceName deviceID:(NSString* _Nullable)deviceID QRCode:(NSString* _Nullable)QRCode error:(NSError* _Nullable* _Nullable)error;
-- (void)setDNS:(NSString* _Nullable)dnsIP protocol:(NSString* _Nullable)protocol;
-- (BOOL)setProxy:(NSString* _Nullable)platform hostName:(NSString* _Nullable)hostName port:(long)port error:(NSError* _Nullable* _Nullable)error;
+- (IronchipauthenticatorgolangsdkSafezone* _Nullable)getScanResult:(NSString* _Nullable)keyName isCreation:(BOOL)isCreation error:(NSError* _Nullable* _Nullable)error;
 @end
 
 #endif
